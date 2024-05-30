@@ -10,7 +10,7 @@ export const movies = [
     genres: ['анімація', 'комедія', 'пригоди', 'сімейний'],
     directors: ['Марк Діндал'],
     rating: 0,
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/uk/thumb/6/62/%D2%90%D0%B0%D1%80%D1%84%D1%96%D0%BB%D0%B4_%D1%83_%D0%BA%D1%96%D0%BD%D0%BE_%282024%29_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg/225px-%D2%90%D0%B0%D1%80%D1%84%D1%96%D0%BB%D0%B4_%D1%83_%D0%BA%D1%96%D0%BD%D0%BE_%282024%29_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079285/cinemax-images/%D2%90%D0%B0%D1%80%D1%84%D1%96%D0%BB%D0%B4_%D1%83_%D0%BA%D1%96%D0%BD%D0%BE__2024__%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80_l0dpe9.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=xfnQbW_IOjw&ab_channel=planetakino',
   },
   {
@@ -22,7 +22,7 @@ export const movies = [
     genres: ['комедія', 'драма', 'сімейний'],
     directors: ['Джон Красінскі'],
     rating: 0,
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/uk/e/e7/%D0%A3%D1%8F%D0%B2%D0%BD%D1%96_%D0%B4%D1%80%D1%83%D0%B7%D1%96_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079439/cinemax-images/%D0%A3%D1%8F%D0%B2%D0%BD%D1%96_%D0%B4%D1%80%D1%83%D0%B7%D1%96_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80_oeoepl.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=EFrEPzxmQjM&ab_channel=planetakino',
   },
   {
@@ -34,7 +34,7 @@ export const movies = [
     genres: ['фантастика', 'екшн'],
     directors: ['Вес Болл'],
     rating: 0,
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/uk/f/f0/%D0%9A%D0%BE%D1%80%D0%BE%D0%BB%D1%96%D0%B2%D1%81%D1%82%D0%B2%D0%BE_%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D0%B8_%D0%BC%D0%B0%D0%B2%D0%BF.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079461/cinemax-images/%D0%9A%D0%BE%D1%80%D0%BE%D0%BB%D1%96%D0%B2%D1%81%D1%82%D0%B2%D0%BE_%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D0%B8_%D0%BC%D0%B0%D0%B2%D0%BF_ccryuj.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=Ed-rbhWhzTU&ab_channel=planetakino',
   },
   {
@@ -46,7 +46,7 @@ export const movies = [
     genres: ['анімація', 'комедія', 'сімейний'],
     directors: ['Кріс Дженкінс'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004579/10Lives-vend.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079463/cinemax-images/10Lives-vend_vz7hsj.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=wIQE7rBdr1c&ab_channel=planetakino',
   },
   {
@@ -58,7 +58,7 @@ export const movies = [
     genres: ['жахи'],
     directors: ['Гінанті Рона', 'Тембанг Сарі'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004613/ts-vend18.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079476/cinemax-images/ts-vend18_sq9jxr.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=xvNGnAebrI4&ab_channel=planetakino',
   },
   {
@@ -70,7 +70,7 @@ export const movies = [
     genres: ['комедія', 'екшн'],
     directors: ['Девід Літч'],
     rating: 0,
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3TnQzb9rO_BFb5End7l6SwQ-5d4t2FbAUg&s',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079497/cinemax-images/images_jsavha.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=Xmi7ZsHL6Jg&ab_channel=planetakino',
   },
   {
@@ -82,7 +82,7 @@ export const movies = [
     genres: ['комедія', 'пригоди', 'сімейний'],
     directors: ['Давід Моро'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004268/vend.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079563/cinemax-images/vend_ebgyu4.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=OX7ZLYAoqtc&ab_channel=planetakino',
   },
   {
@@ -94,7 +94,7 @@ export const movies = [
     genres: ['драма'],
     directors: ['Валентин Васянович'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004567/640/944/reflection-vend.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079676/cinemax-images/reflection-vend_fbo7vl.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=voDDciroV1A&ab_channel=planetakino',
   },
   {
@@ -106,7 +106,7 @@ export const movies = [
     genres: ['документальний'],
     directors: ['Любомир Левицький'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004596/Recrut-vend.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079678/cinemax-images/Recrut-vend_vxeuv9.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=azxD_Q_nlK8&ab_channel=planetakino',
   },
   {
@@ -118,7 +118,7 @@ export const movies = [
     genres: ['анімація', 'комедія', 'пригоди', 'сімейний'],
     directors: ['Кріс Рено'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004471/despicable_me4-vend2.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079696/cinemax-images/despicable_me4-vend2_hvjylm.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=UMqq5l9KRiA&ab_channel=planetakino',
   },
   {
@@ -130,7 +130,7 @@ export const movies = [
     genres: ['комедія', 'пригоди', 'романтика'],
     directors: ['Аліче Рорвахер'],
     rating: 0,
-    imageUrl: 'https://planetakino.ua/res/get-poster/00000000000000000000000000004619/himera-vend2.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079704/cinemax-images/himera-vend2_udocjr.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=NJSgt7AqS8s&ab_channel=planetakino',
   },
   {
@@ -142,7 +142,7 @@ export const movies = [
     genres: ['жахи'],
     directors: ['Спенсер Коен', 'Анна Галберґ'],
     rating: 0,
-    imageUrl: 'https://nnmstatic.win/forum/image.php?link=https://i2.imageban.ru/out/2024/05/21/beb2c59e7a5598616eb6c7ee217ece4d.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079722/cinemax-images/4a9900246d16924cfc2b3e2c2159a_h1rze8.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=j3wUuh8GJto&ab_channel=planetakino',
   },
   {
@@ -154,7 +154,7 @@ export const movies = [
     genres: ['комедія', 'екшин'],
     directors: ['Аділь Ель Арбі', 'Білал Фалла'],
     rating: 0,
-    imageUrl: 'https://ua-images.kinorium.com/movie/1080/1447804.jpg?1713518541',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079719/cinemax-images/1447804_xslnex.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=tXNLwsQZRNI&ab_channel=B%26HFilmDistributionCompany',
   },
   {
@@ -166,7 +166,7 @@ export const movies = [
     genres: ['трилер', 'жахи'],
     directors: ['Ренні Гарлін'],
     rating: 0,
-    imageUrl: 'https://kino-strichka.com/wp-content/uploads/2024/05/9aaa221f7abb23388536a23c74af2c3f2f8e9a9b-400x650.jpg',
+    imageUrl: 'https://res.cloudinary.com/di4dnbxpv/image/upload/v1717079724/cinemax-images/9aaa221f7abb23388536a23c74af2c3f2f8e9a9b-400x650_zjs27v.jpg',
     trailerUrl: 'https://www.youtube.com/watch?v=dUe_Ac4V-R4&ab_channel=planetakino',
   },
 ];
