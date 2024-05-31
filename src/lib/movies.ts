@@ -1,11 +1,8 @@
 import Movie from '@/interfaces/movie.interface';
 import prisma from '../lib/prisma';
+import Filter from '@/interfaces/filter.interface';
 
-interface Filters {
-  genres?: string[],
-}
-
-export async function getMovies(page?: number, limit?: number, filters?: Filters): Promise<Movie[]> {
+export async function getMovies(page?: number, limit?: number, filters?: Filter): Promise<Movie[]> {
   let offset: number = 0;
 
   if (page && limit) {

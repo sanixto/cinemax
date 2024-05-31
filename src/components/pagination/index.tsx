@@ -15,7 +15,7 @@ export default function Pagination({ totalPages }: PaginationProps) {
 
   const createPageURL = (pageNumber: number) => {
     if (pageNumber < 1 || pageNumber > totalPages) return;
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };

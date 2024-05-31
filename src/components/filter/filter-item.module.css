@@ -1,0 +1,15 @@
+.filter {
+  text-transform: capitalize;
+  padding: 0 0.3em 0.3em 0.7em ;
+  border: 2px solid #ff8a05;
+  border-radius: 20px;
+  margin: 0 0.5em 0.5em 0;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  background-clip: border;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.filter span {
+  font-size: 1.5em;
+}
