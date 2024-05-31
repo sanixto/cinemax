@@ -1,6 +1,7 @@
+import Movie from '../interfaces/movie.interface';
 import { v4 as uuidv4 } from 'uuid';
 
-export const movies = [
+export const movies: Movie[] = [
   {
     id: uuidv4(),
     title: 'Ґарфілд у кіно',
