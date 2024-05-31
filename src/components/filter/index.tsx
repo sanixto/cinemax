@@ -51,7 +51,9 @@ export default function Filter({ filter }: FilterProps) {
 
   const deleteFilter = (name: FilterKey, value: string) => {
     const newFilter = {...selectedFilter};
-    newFilter[name] = newFilter[name]?.filter((item: string) => item !== value);
+    if (name === 'genres' && Array.isArray(newFilter.genres)) {
+      newFilter.genres = newFilter.genres.filter((item: string) => item !== value);
+    }
     setSelectedFilter(newFilter);
   }
 
@@ -60,7 +62,7 @@ export default function Filter({ filter }: FilterProps) {
       <section>
         <select className={styles.select} name="filter-genre" id="filter-genre" onChange={handleChange} defaultValue={'genre'}>
         <option disabled value={'genre'}>Жанр</option>
-        {filter.genres?.map(genre => (
+        {filter.genres?.sort().map(genre => (
           <option key={genre} value={genre}>{genre}</option>
         ))}
       </select>

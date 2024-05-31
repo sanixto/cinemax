@@ -1,8 +1,8 @@
 import Movie from '@/interfaces/movie.interface';
 import prisma from '../lib/prisma';
-import Filter from '@/interfaces/filter.interface';
+import { FilterInterface } from '@/interfaces/filter.interface';
 
-export async function getMovies(page?: number, limit?: number, filters?: Filter): Promise<Movie[]> {
+export async function getMovies(page?: number, limit?: number, filter?: FilterInterface): Promise<Movie[]> {
   let offset: number = 0;
 
   if (page && limit) {
@@ -13,8 +13,11 @@ export async function getMovies(page?: number, limit?: number, filters?: Filter)
     const data = await prisma.movies.findMany({
       where: {
         genres: {
-          hasEvery: filters?.genres,
+          hasEvery: filter?.genres,
         },
+          title: {
+            contains: filter?.title?.toLowerCase(),
+          }
       },
       take: limit,
       skip: offset,
@@ -35,13 +38,16 @@ export async function getMovies(page?: number, limit?: number, filters?: Filter)
   }
 }
 
-export async function getMoviesLength(filters?: Filters): Promise<number> {
+export async function getMoviesLength(filter?: FilterInterface): Promise<number> {
   try {
     const count = await prisma.movies.count({
       where: {
         genres: {
-          hasEvery: filters?.genres,
+          hasEvery: filter?.genres,
         },
+          title: {
+            contains: filter?.title?.toLowerCase(),
+          }
       },
     });
     return count;

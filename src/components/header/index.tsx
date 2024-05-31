@@ -15,7 +15,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="hidden lg:flex flex-1 p-1">
-          <SearchField />
+          <SearchField placeholder="Пошук по назві фільму" />
         </div>
         <div className="md:hidden">
           <HamburgerMenu />
@@ -25,7 +25,7 @@ export default function Header() {
         </div>
       </div>
       <div className="lg:hidden pt-1">
-        <SearchField />
+        <SearchField placeholder="Пошук по назві фільму" />
       </div>
     </header>
   );
