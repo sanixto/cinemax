@@ -6,3 +6,14 @@
   padding: 0;
   margin: 0;
 }
+
+.loading {
+  padding: 20em 10em;
+  text-align: center;
+}
+
+.loading h1 {
+  color: #ddd6cb;
+  font-size: 2em;
+  font-weight: bold;
+}
