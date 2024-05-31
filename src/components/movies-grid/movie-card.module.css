@@ -27,6 +27,12 @@
   text-transform: uppercase;
 }
 
+@media (min-width: 640px) {
+  .img-container {
+    height: 30em;
+  }
+}
+
 @media (min-width: 768px) {
   .info span {
     font-size: 1.2em;
@@ -35,5 +41,11 @@
   .info h3 {
     font-size: 1.5em;
     padding-top: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .img-container {
+    height: 25em;
   }
 }
