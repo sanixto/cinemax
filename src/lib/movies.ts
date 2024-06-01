@@ -2,6 +2,21 @@ import Movie from '@/interfaces/movie.interface';
 import prisma from '../lib/prisma';
 import { FilterInterface } from '@/interfaces/filter.interface';
 
+const transformMovie = (data: any): Movie => {
+  return ({
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    year: data.year,
+    duration: data.duration,
+    genres: data.genres,
+    directors: data.directors,
+    rating: data.rating,
+    imageUrl: data.image_url,
+    trailerUrl: data.trailer_url,
+  });
+}
+
 export async function getMovies(page?: number, limit?: number, filter?: FilterInterface): Promise<Movie[]> {
   let offset: number = 0;
 
@@ -23,13 +38,7 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
       skip: offset,
     });
 
-    const transformedData: Movie[] = data.map(movie => ({
-      ...movie,
-      imageUrl: movie.image_url,
-      trailerUrl: movie.trailer_url,
-      image_url: undefined,
-      trailer_url: undefined,
-    }));
+    const transformedData: Movie[] = data.map(movie => transformMovie(movie));
 
     return transformedData;
   } catch (error) {
@@ -54,6 +63,24 @@ export async function getMoviesLength(filter?: FilterInterface): Promise<number>
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch movies data length.');
+  }
+}
+
+export async function getMovie(id: string): Promise<Movie | null> {
+  try {
+    const data = await prisma.movies.findFirst({
+      where: {
+       id: id,
+      },
+    });
+
+    if (!data) return null;
+    const transformedData = transformMovie(data);
+
+    return transformedData;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to fetch movie data with id${id}`);
   }
 }
 

@@ -1,11 +1,5 @@
 .card {
   width: 100%;
-  border: 1px solid black;
-}
-
-.card:hover {
-  box-shadow: 0px 0px 20px 1px #000000;
-  cursor: pointer;
 }
 
 .img-container {
