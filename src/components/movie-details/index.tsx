@@ -9,6 +9,9 @@ interface MovieDetailsProps {
 }
 
 export default function MovieDetails({ movie }: MovieDetailsProps) {
+  const hours = Math.floor(movie.duration / 60);
+  const minutes = movie.duration % 60;
+
   return (
     <article className={styles.article}>
       <div className='grid grid-cols-1 md:grid-cols-2'>
@@ -25,9 +28,9 @@ export default function MovieDetails({ movie }: MovieDetailsProps) {
         <section className={styles.details}>
           <h2>{movie.title}</h2>
           <ul>
-            <li><b>Рейтинг:</b> {movie.rating}</li>
+            <li><b>Рейтинг:</b> {movie.rating}★</li>
             <li><b>Рік:</b> {movie.year}</li>
-            <li><b>Час:</b> {movie.duration}</li>
+            <li><b>Час:</b> {hours && `${hours} год `} {minutes && `${minutes} хв `}</li>
             <li><b>Жанр:</b> {movie.genres.join(', ')}</li>
             <li><b>Режисер:</b> {movie.directors.join(', ')}</li>
             <li>
