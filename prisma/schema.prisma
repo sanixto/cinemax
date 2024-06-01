@@ -22,4 +22,14 @@ model movies {
   rating      Float
   image_url    String
   trailer_url  String
+  showtimes     showtimes[]
+}
+
+model showtimes {
+  id            String   @id @default(uuid())
+  movie         movies    @relation(fields: [movie_id], references: [id])
+  movie_id       String
+  date          DateTime
+  time          String
+  available_seats Json
 }
