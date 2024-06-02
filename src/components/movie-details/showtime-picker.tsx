@@ -3,12 +3,14 @@
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 import { getNextFormattedDays } from '@/lib/formatDate';
 import styles from './showtime-picker.module.css';
 import calendarImg from '@/assets/calendar.png';
 import Showtime from '@/interfaces/showtime.interface';
 import DateData from '@/interfaces/dateData.interface';
+import { LOGIN_PATH } from '@/constants';
 
 interface ShowtimePicker {
   showtimes: Showtime[],
@@ -19,6 +21,7 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
   const router = useRouter();
   const pathname: string = usePathname();
   const searchParams = useSearchParams();
+  const { user, error, isLoading } = useUser();
 
   const datesData = getNextFormattedDays(new Date(), 7);
 
@@ -39,6 +42,10 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
 
   const handleDateClick = (date: DateData) => {
     setSelectedDate(date);
+  }
+
+  const handleTimeClick = () => {
+    if (!isLoading && !error && !user ) router.push(LOGIN_PATH);
   }
 
   return (
@@ -66,7 +73,10 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
         <ul className={styles.list}>
           {showtimes.length > 0 ? (
             showtimes.map(showtime => (
-              <li key={showtime.id}>
+              <li
+                key={showtime.id}
+                onClick={handleTimeClick}
+              >
                 <span>{showtime.time}</span>
               </li>
             ))

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './navigation.module.css';
 import profileImg from '../../assets/profile.png';
 import NavLink from './nav-link';
-
+import AuthButton from './auth-button';
 export default function Navigation() {
   return (
     <nav className={styles.nav}>
@@ -22,6 +22,7 @@ export default function Navigation() {
             <Image src={profileImg} alt='Особистий кабінет' priority width={50} height={50} />
           </NavLink>
         </li>
+        <li><AuthButton /></li>
       </ul>
     </nav>
   );

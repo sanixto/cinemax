@@ -4,6 +4,7 @@ import styles from './index.module.css';
 import HamburgerMenu from './hamburger-menu';
 import Navigation from './navigation';
 import SearchField from './search-field';
+import AuthButton from './auth-button';
 
 export default function Header() {
   return (
@@ -19,6 +20,7 @@ export default function Header() {
         </div>
         <div className="md:hidden">
           <HamburgerMenu />
+          <div><AuthButton /></div>
         </div>
         <div className="hidden md:block">
           <Navigation />

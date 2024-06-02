@@ -10,6 +10,7 @@
     "seed": "tsc ./src/scripts/seed.ts && node -r dotenv/config ./src/scripts/seed.js"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@prisma/client": "^5.14.0",
     "dotenv": "^16.4.5",
     "next": "14.2.3",

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import './globals.css';
 import Header from '@/components/header';
@@ -16,11 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <UserProvider>
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </UserProvider>
     </html>
   );
 }
