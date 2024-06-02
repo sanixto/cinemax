@@ -1,22 +1,13 @@
 import Showtime from '@/interfaces/showtime.interface';
 import prisma from '../lib/prisma';
-
-const transformShowtime = (data: any): Showtime => {
-  return ({
-    id: data.id,
-    movieId: data.movie_id,
-    date: data.date,
-    time: data.time,
-    availableSeats: JSON.parse(data.available_seats),
-  });
-}
+import { parseDataFromDB } from './parseDataFromDB';
 
 export async function getShowtimes(movieId: string, date?: Date): Promise<Showtime[] | null> {
   let formattedDate: Date | undefined;
   if (date) formattedDate = new Date(date.toISOString().split('T')[0]);
 
   try {
-    const data = await prisma.showtimes.findMany({
+    const data = await prisma.showtime.findMany({
       where: {
         movie_id: movieId,
         date: formattedDate,
@@ -25,9 +16,14 @@ export async function getShowtimes(movieId: string, date?: Date): Promise<Showti
 
     if (!data) return null;
 
-    const transformedData: Showtime[] = data.map(showtime => transformShowtime(showtime));
+    const parsedShowtimes = data.map(showtime => parseDataFromDB(showtime));
+    parsedShowtimes.map(showtime => {
+      return Object.assign(showtime, {
+        availableSeats: JSON.parse(showtime.availableSeats)
+      });
+    });
 
-    return transformedData;
+    return parsedShowtimes;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch showtimes data.');
