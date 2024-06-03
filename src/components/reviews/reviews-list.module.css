@@ -5,10 +5,6 @@
   margin-bottom: 1em;
 }
 
-.item .info {
-  padding-bottom: 2em;
-}
-
 .item h4 {
   font-weight: bold;
   font-size: 1.2em;
@@ -46,4 +42,5 @@
   border: 1px solid #ece5d9;
   border-radius: 2px;
   padding: 1em;
+  margin-top: 1em;
 }

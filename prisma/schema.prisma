@@ -51,7 +51,7 @@ model Review {
   movie         Movie    @relation(fields: [movie_id], references: [id])
   movie_id      String
   rating        Int
-  comment       String
+  comment       String?
   created_at    DateTime @default(now())
 
   @@index([user_id], name: "idx_user_id")

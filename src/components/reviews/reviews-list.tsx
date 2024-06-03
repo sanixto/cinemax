@@ -26,9 +26,11 @@ export default function ReviewsList({ reviews, reviewers }: ReviewsListProps) {
                 {formatDateAndTime(review.createdAt)}
               </time>
             </section>
-            <section className={styles.comment}>
+            {review?.comment &&
+              <section className={styles.comment}>
               {review.comment}
             </section>
+            }
           </li>
       )})}
    </ul>

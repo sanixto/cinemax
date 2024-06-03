@@ -3,6 +3,6 @@ export default interface Review {
   userId: string,
   movieId: string,
   rating: number,
-  comment: string,
+  comment?: string,
   createdAt: Date,
 }

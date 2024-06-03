@@ -53,7 +53,6 @@ export default function ReviewForm({ action }: ReviewFormProps) {
         rows={10}
         value={comment}
         onChange={handleChangeComment}
-        required
       ></textarea>
       <div className="flex justify-end">
         <button type="submit">

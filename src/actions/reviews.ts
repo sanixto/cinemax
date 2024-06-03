@@ -25,16 +25,12 @@ export async function createReview(movieId: string, prevState: createReviewState
     }
   }
   const rating: number = Number(formData.get('rating')?.toString());
-  const comment: string = formData.get('comment')?.toString()!;
+  const comment: string | undefined = formData.get('comment')?.toString();
 
   const errorMessages: string[] = [];
 
   if (!rating) {
     errorMessages.push('Ratinng is required.')
-  }
-
-  if (!comment || comment.trim().length === 0) {
-    errorMessages.push('Comment is required.')
   }
 
   if (rating < 0 || rating > 10) {
