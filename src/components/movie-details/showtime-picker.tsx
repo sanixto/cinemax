@@ -65,7 +65,7 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
           ))}
         </ul>
         <div className={styles.calendar}>
-          <Image src={calendarImg} alt="Calendar icon" fill/>
+          <Image src={calendarImg} alt="Calendar icon" sizes="(max-width: 768px) 20vw, 8vw" fill/>
         </div>
       </section>
       <section>

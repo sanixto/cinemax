@@ -1,9 +1,8 @@
-import Image from 'next/image';
-
 import styles from './navigation.module.css';
-import profileImg from '../../assets/profile.png';
 import NavLink from './nav-link';
 import AuthButton from './auth-button';
+import ProfileButton from './profile-button';
+
 export default function Navigation() {
   return (
     <nav className={styles.nav}>
@@ -18,11 +17,11 @@ export default function Navigation() {
           <NavLink  href='/about'>Про кінотеатр</NavLink>
         </li>
         <li>
-          <NavLink href='/profile'>
-            <Image src={profileImg} alt='Особистий кабінет' priority width={50} height={50} />
-          </NavLink>
+          <ProfileButton />
         </li>
-        <li><AuthButton /></li>
+        <li>
+          <AuthButton />
+        </li>
       </ul>
     </nav>
   );

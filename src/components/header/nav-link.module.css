@@ -15,6 +15,9 @@
   text-shadow: 0 0 18px rgba(248, 190, 42, 0.8);
 }
 
+.link img {
+  border-radius: 100%;
+}
 
 .active {
   background: linear-gradient(90deg, #ff8a05, #f9b331);
