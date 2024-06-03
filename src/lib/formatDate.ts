@@ -14,3 +14,13 @@ export function getNextFormattedDays(startDate: Date, amount: number): DateData[
   }
   return datesData;
 }
+
+export function formatDateAndTime(date: Date) {
+  const optionsDate: Intl.DateTimeFormatOptions  = { day: 'numeric', month: 'long', year: 'numeric' };
+  const optionsTime: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit' };
+
+  const formattedDate: string = date.toLocaleDateString('uk-UA', optionsDate);
+  const formattedTime: string = date.toLocaleTimeString('uk-UA', optionsTime);
+
+  return `${formattedDate} ${formattedTime}`;
+}
