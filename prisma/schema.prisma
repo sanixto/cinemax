@@ -11,25 +11,48 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model movies {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  year        Int
-  duration    Int
-  genres      String[]
-  directors   String[]
-  rating      Float
-  image_url    String
-  trailer_url  String
-  showtimes     showtimes[]
+model Movie {
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  year           Int
+  duration       Int
+  genres         String[]
+  directors      String[]
+  rating         Float
+  image_url      String
+  trailer_url    String
+  showtimes      Showtime[]
+  reviews        Review[]
 }
 
-model showtimes {
+model Showtime {
+  id               String   @id @default(uuid())
+  movie            Movie    @relation(fields: [movie_id], references: [id])
+  movie_id         String
+  date             DateTime
+  time             String
+  available_seats  Json
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  image_url   String
+  reviews     Review[]
+}
+
+model Review {
   id            String   @id @default(uuid())
-  movie         movies    @relation(fields: [movie_id], references: [id])
-  movie_id       String
-  date          DateTime
-  time          String
-  available_seats Json
+  user          User     @relation(fields: [user_id], references: [id])
+  user_id       String
+  movie         Movie    @relation(fields: [movie_id], references: [id])
+  movie_id      String
+  rating        Int
+  comment       String
+  created_at    DateTime @default(now())
+
+  @@index([user_id], name: "idx_user_id")
+  @@index([movie_id], name: "idx_movie_id")
 }
