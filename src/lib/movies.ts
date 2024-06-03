@@ -1,7 +1,7 @@
 import Movie from '@/interfaces/movie.interface';
 import prisma from '../lib/prisma';
 import { FilterInterface } from '@/interfaces/filter.interface';
-import { parseDataFromDB } from './parseDataFromDB';
+import { parseDataFromDB } from './databaseData';
 
 export async function getMovies(page?: number, limit?: number, filter?: FilterInterface): Promise<Movie[]> {
   let offset: number = 0;

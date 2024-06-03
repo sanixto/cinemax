@@ -1,6 +1,6 @@
 import Showtime from '@/interfaces/showtime.interface';
 import prisma from '../lib/prisma';
-import { parseDataFromDB } from './parseDataFromDB';
+import { parseDataFromDB } from './databaseData';
 
 export async function getShowtimes(movieId: string, date?: Date): Promise<Showtime[] | null> {
   let formattedDate: Date | undefined;
