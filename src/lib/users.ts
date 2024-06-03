@@ -1,6 +1,6 @@
 import User from '@/interfaces/user.interface';
 import prisma from '../lib/prisma';
-import { parseDataFromDB } from './parseDataFromDB';
+import { parseDataFromDB } from './databaseData';
 import Auth0User from '@/interfaces/auth0User.interface';
 
 export async function getUsers(): Promise<User[] | null> {
@@ -23,6 +23,25 @@ export async function getUser(id: string): Promise<User | null> {
     const data = await prisma.user.findFirst({
       where: {
         id: id,
+      }
+    });
+
+    if (!data) return null;
+
+    const parsedUser: User = parseDataFromDB(data);
+
+    return parsedUser;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch users data.');
+  }
+}
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  try {
+    const data = await prisma.user.findFirst({
+      where: {
+        email: email,
       }
     });
 
