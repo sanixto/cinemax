@@ -17,3 +17,13 @@
   font-size: 2em;
   font-weight: bold;
 }
+
+.warning {
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  padding: 1em 0.5em;
+  border: 1px solid #ddd6cb;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  font-weight: 500;
+}

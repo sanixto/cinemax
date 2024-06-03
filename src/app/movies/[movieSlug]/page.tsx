@@ -1,3 +1,4 @@
+import { createReview } from "@/actions/reviews";
 import MovieDetails from "@/components/movie-details";
 import ShowtimePicker from "@/components/movie-details/showtime-picker";
 import Reviews from "@/components/reviews";
@@ -38,7 +39,7 @@ export default async function MealDetailsPage({ params, searchParams }: MealDeta
     <main className="p-5 lg:px-10">
       <MovieDetails movie={movie} />
       <ShowtimePicker showtimes={showtimes} />
-      <Reviews reviews={reviews} reviewers={users} />
+      <Reviews reviews={reviews} reviewers={users} action={createReview.bind(undefined, movie.id)} />
     </main>
   );
 }
