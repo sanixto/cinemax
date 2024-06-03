@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import styles from './movie-card.module.css';
 import Movie from '@/interfaces/movie.interface';
+import { formatRating } from '@/lib/formatData';
 
 interface MovieCardProps {
   movie: Movie,
@@ -21,7 +22,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
         </div>
       </header>
       <div className={styles.info}>
-        <span>★{movie.rating}</span>
+        <span>★{formatRating(movie.rating)}</span>
         <h3>{movie.title}</h3>
       </div>
     </article>
