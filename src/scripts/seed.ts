@@ -13,6 +13,7 @@ async function seedMovies() {
         genres: movie.genres,
         directors: movie.directors,
         rating: movie.rating,
+        votes: movie.votes,
         image_url: movie.imageUrl,
         trailer_url: movie.trailerUrl,
       },
@@ -63,13 +64,13 @@ async function seedReviews() {
       },
     });
   }
-  console.log(`Seeded ${users.length} users`);
+  console.log(`Seeded ${reviews.length} users`);
 }
 
 async function main() {
   try {
-    // await seedMovies();
-    // await seedShowtimes();
+    await seedMovies();
+    await seedShowtimes();
     await seedUsers();
     await seedReviews();
   } catch (err) {

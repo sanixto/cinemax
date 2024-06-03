@@ -7,6 +7,7 @@ import { saveReview } from '@/lib/reviews';
 import Auth0User from '@/interfaces/auth0User.interface';
 import User from '@/interfaces/user.interface';
 import { getUserByEmail } from '@/lib/users';
+import { updateRating } from '@/lib/movies';
 
 interface createReviewState {
   errorMessages: string[],
@@ -42,12 +43,19 @@ export async function createReview(movieId: string, prevState: createReviewState
 
   if (errorMessages.length > 0) return { errorMessages };
   if (user) {
-    saveReview({
-      userId: user?.id,
-      movieId,
-      rating,
-      comment,
-    });
+    try {
+      const review = await saveReview({
+        userId: user?.id,
+        movieId,
+        rating,
+        comment,
+      });
+      if (review) {
+        await updateRating(movieId, rating);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   revalidatePath(`/movies/${movieId}`, 'page');

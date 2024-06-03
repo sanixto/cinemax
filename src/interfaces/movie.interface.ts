@@ -7,6 +7,7 @@ export default interface Movie {
   genres: string[],
   directors: string[],
   rating: number,
+  votes: number,
   imageUrl: string,
   trailerUrl: string,
 }

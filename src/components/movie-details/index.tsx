@@ -28,7 +28,7 @@ export default function MovieDetails({ movie }: MovieDetailsProps) {
         <section className={styles.details}>
           <h2>{movie.title}</h2>
           <ul>
-            <li><b>Рейтинг:</b> {movie.rating}★</li>
+            <li><b>Рейтинг:</b> {movie.rating.toFixed(1)}/10★({movie.votes})</li>
             <li><b>Рік:</b> {movie.year}</li>
             <li><b>Час:</b> {hours && `${hours} год `} {minutes && `${minutes} хв `}</li>
             <li><b>Жанр:</b> {movie.genres.join(', ')}</li>

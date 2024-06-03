@@ -20,6 +20,7 @@ model Movie {
   genres         String[]
   directors      String[]
   rating         Float
+  votes          Int
   image_url      String
   trailer_url    String
   showtimes      Showtime[]
