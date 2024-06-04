@@ -44,8 +44,12 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
     setSelectedDate(date);
   }
 
-  const handleTimeClick = () => {
+  const handleTimeClick = (showtime: Showtime) => {
     if (!isLoading && !error && !user ) router.push(LOGIN_PATH);
+    const currentSearchParams = new URLSearchParams(searchParams.toString());
+    currentSearchParams.set('showtimeId', showtime.id);
+    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
+    router.replace(`${newUrl}`, { scroll: false});
   }
 
   return (
@@ -75,7 +79,7 @@ export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
             showtimes.map(showtime => (
               <li
                 key={showtime.id}
-                onClick={handleTimeClick}
+                onClick={() => handleTimeClick(showtime)}
               >
                 <span>{showtime.time}</span>
               </li>

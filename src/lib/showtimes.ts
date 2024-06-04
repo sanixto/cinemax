@@ -29,3 +29,23 @@ export async function getShowtimes(movieId: string, date?: Date): Promise<Showti
     throw new Error('Failed to fetch showtimes data.');
   }
 }
+
+export async function getShowtime(id: string): Promise<Showtime | null> {
+  try {
+    const data = await prisma.showtime.findUnique({
+      where: {
+       id: id
+      }
+    });
+
+    if (!data) return null;
+
+    const parsedShowtime = parseDataFromDB(data);
+    parsedShowtime.availableSeats = JSON.parse(parsedShowtime.availableSeats);
+
+    return parsedShowtime;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch showtimes data.');
+  }
+}

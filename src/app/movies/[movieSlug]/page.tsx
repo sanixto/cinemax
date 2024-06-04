@@ -1,15 +1,18 @@
-import { createReview } from "@/actions/reviews";
-import MovieDetails from "@/components/movie-details";
-import ShowtimePicker from "@/components/movie-details/showtime-picker";
-import Reviews from "@/components/reviews";
-import Review from "@/interfaces/review.interface";
-import Showtime from "@/interfaces/showtime.interface";
-import User from "@/interfaces/user.interface";
-import { getMovie } from "@/lib/movies";
-import { getReviews } from "@/lib/reviews";
-import { getShowtimes } from "@/lib/showtimes";
-import { getUser } from "@/lib/users";
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
+
+import { createReview } from '@/actions/reviews';
+import ModalSeatsPicker from '@/components/modalSeatsPicker';
+import MovieDetails from '@/components/movie-details';
+import ShowtimePicker from '@/components/movie-details/showtime-picker';
+import Reviews from '@/components/reviews';
+import Review from '@/interfaces/review.interface';
+import Showtime from '@/interfaces/showtime.interface';
+import User from '@/interfaces/user.interface';
+import { getMovie } from '@/lib/movies';
+import { getReviews } from '@/lib/reviews';
+import { getShowtime, getShowtimes } from '@/lib/showtimes';
+import { getUser } from '@/lib/users';
+import Movie from '@/interfaces/movie.interface';
 
 interface MealDetailsPage {
   params: {
@@ -17,15 +20,21 @@ interface MealDetailsPage {
   },
   searchParams: {
     date?: string,
+    showtimeId?: string,
   }
 }
 
 export default async function MealDetailsPage({ params, searchParams }: MealDetailsPage) {
   const selectedDateStr: string | undefined = searchParams?.date;
   const date = selectedDateStr ? new Date(selectedDateStr) : new Date();
-  const movie = await getMovie(params.movieSlug);
+  const showtimeId: string | undefined = searchParams?.showtimeId;
+
+  const movie: Movie | null = await getMovie(params.movieSlug);
 
   if (!movie) notFound();
+
+  let showtime: Showtime | null = null;
+  if (showtimeId) showtime = await getShowtime(showtimeId);
 
   const showtimes: Showtime[] = await getShowtimes(movie.id, date) ?? [];
   const reviews: Review[] = await getReviews(movie.id) ?? [];
@@ -39,6 +48,7 @@ export default async function MealDetailsPage({ params, searchParams }: MealDeta
     <main className="p-5 lg:px-10">
       <MovieDetails movie={movie} />
       <ShowtimePicker showtimes={showtimes} />
+      <ModalSeatsPicker showtime={showtime} movie={movie}/>
       <Reviews reviews={reviews} reviewers={users} action={createReview.bind(undefined, movie.id)} />
     </main>
   );
