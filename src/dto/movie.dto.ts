@@ -1,5 +1,4 @@
-export default interface Movie {
-  id: string,
+export default interface MovieDto {
   title: string,
   description: string,
   year: number,

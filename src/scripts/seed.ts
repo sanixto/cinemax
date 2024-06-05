@@ -14,8 +14,8 @@ async function seedMovies() {
         directors: movie.directors,
         rating: movie.rating,
         votes: movie.votes,
-        image_url: movie.imageUrl,
-        trailer_url: movie.trailerUrl,
+        imageUrl: movie.imageUrl,
+        trailerUrl: movie.trailerUrl,
       },
     });
   }
@@ -28,10 +28,10 @@ async function seedShowtimes() {
     await prisma.showtime.create({
       data: {
         id: showtime.id,
-        movie_id: showtime.movieId,
+        movieId: showtime.movieId,
         date: formattedDate,
         time: showtime.time,
-        available_seats: JSON.stringify(showtime.availableSeats),
+        availableSeats: JSON.stringify(showtime.availableSeats),
       },
     });
   }
@@ -41,12 +41,7 @@ async function seedShowtimes() {
 async function seedUsers() {
   for (const user of users) {
     await prisma.user.create({
-      data: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        image_url: user.imageUrl,
-      },
+      data: user
     });
   }
   console.log(`Seeded ${users.length} users`);
@@ -57,8 +52,8 @@ async function seedReviews() {
     await prisma.review.create({
       data: {
         id: review.id,
-        user_id: review.userId,
-        movie_id: review.movieId,
+        userId: review.userId,
+        movieId: review.movieId,
         rating: review.rating,
         comment: review.comment,
       },
@@ -69,10 +64,10 @@ async function seedReviews() {
 
 async function main() {
   try {
-    await seedMovies();
-    await seedShowtimes();
-    await seedUsers();
-    await seedReviews();
+    // await seedMovies();
+    // await seedShowtimes();
+    // await seedUsers();
+    // await seedReviews();
   } catch (err) {
     console.error('An error occurred while attempting to seed the database:', err);
   }

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 import styles from './index.module.css';
-import Movie from '@/interfaces/movie.interface';
 import Player from './player';
 import { formatRating } from '@/lib/formatData';
+import { Movie } from '@prisma/client';
 
 interface MovieDetailsProps {
   movie: Movie,

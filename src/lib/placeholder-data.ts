@@ -1,8 +1,5 @@
-import Showtime from '../interfaces/showtime.interface';
-import Movie from '../interfaces/movie.interface';
+import { Movie, Review, Showtime, User } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
-import Review from '../interfaces/review.interface';
-import User from '../interfaces/user.interface';
 
 export const movies: Movie[] = [
   {

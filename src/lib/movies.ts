@@ -1,7 +1,6 @@
-import Movie from '@/interfaces/movie.interface';
 import prisma from '../lib/prisma';
+import { Movie } from '@prisma/client';
 import { FilterInterface } from '@/interfaces/filter.interface';
-import { parseDataFromDB } from './databaseData';
 
 export async function getMovies(page?: number, limit?: number, filter?: FilterInterface): Promise<Movie[]> {
   let offset: number = 0;
@@ -24,9 +23,7 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
       skip: offset,
     });
 
-    const parsedMovies: Movie[] = data.map(movie => parseDataFromDB(movie));
-
-    return parsedMovies;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch movies data.');
@@ -45,6 +42,7 @@ export async function getMoviesLength(filter?: FilterInterface): Promise<number>
         }
       },
     });
+
     return count;
   } catch (error) {
     console.error('Database Error:', error);
@@ -54,17 +52,11 @@ export async function getMoviesLength(filter?: FilterInterface): Promise<number>
 
 export async function getMovie(id: string): Promise<Movie | null> {
   try {
-    const data = await prisma.movie.findFirst({
-      where: {
-       id: id,
-      },
-    });
+    const data = await prisma.movie.findUnique({ where: { id } });
 
     if (!data) return null;
 
-    const parsedMovie: Movie = parseDataFromDB(data);
-
-    return parsedMovie;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to fetch movie data with id${id}`);
@@ -88,9 +80,7 @@ export async function getAvailableGenres(): Promise<string[]> {
 
 export async function updateRating(id: string, rating: number): Promise<Movie | null> {
   try {
-    const currentMovie = await prisma.movie.findUnique({
-      where: { id },
-    });
+    const currentMovie = await prisma.movie.findUnique({ where: { id } });
 
     if (!currentMovie) {
       console.error(`Movie with id ${id} not found.`);
@@ -102,7 +92,7 @@ export async function updateRating(id: string, rating: number): Promise<Movie | 
 
     const data = await prisma.movie.update({
       where: {
-        id: id,
+        id,
       },
       data: {
         rating: newRating,
@@ -112,9 +102,7 @@ export async function updateRating(id: string, rating: number): Promise<Movie | 
 
     if (!data) return null;
 
-    const parsedMovie: Movie = parseDataFromDB(data);
-
-    return parsedMovie;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to update movie rating with id${id}`);

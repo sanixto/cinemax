@@ -10,7 +10,7 @@ interface SeatsPickerForm {
 export default function SeatsPickerForm({ availableSeats, handleChange, handleSubmit, disabled }: SeatsPickerForm) {
   return (
     <form className={styles.hall} onSubmit={handleSubmit}>
-      {availableSeats.map((row, rowIndex) => {
+      {availableSeats?.map((row, rowIndex) => {
         return (
           <div key={`row-${rowIndex}`} className={styles.row}>
             {row.map((seat, seatIndex) => (

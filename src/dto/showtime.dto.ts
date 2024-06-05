@@ -1,5 +1,4 @@
-export default interface Showtime {
-  id: string,
+export default interface ShowtimeDto {
   movieId: string,
   date: Date,
   time: string,

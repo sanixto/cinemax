@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 import styles from './index.module.css';
-import { FilterInterface, FilterKey } from '@/interfaces/filter.interface';
 import FilterItem from './filter-item';
+import { FilterInterface, FilterKey } from '@/interfaces/filter.interface';
 
 
 interface FilterProps {

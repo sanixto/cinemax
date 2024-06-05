@@ -5,9 +5,9 @@ import { getSession, Session } from '@auth0/nextjs-auth0';
 
 import { saveReview } from '@/lib/reviews';
 import Auth0User from '@/interfaces/auth0User.interface';
-import User from '@/interfaces/user.interface';
 import { getUserByEmail } from '@/lib/users';
 import { updateRating } from '@/lib/movies';
+import { User } from '@prisma/client';
 
 interface createReviewState {
   errorMessages: string[],
@@ -25,7 +25,7 @@ export async function createReview(movieId: string, prevState: createReviewState
     }
   }
   const rating: number = Number(formData.get('rating')?.toString());
-  const comment: string | undefined = formData.get('comment')?.toString();
+  const comment: string | null = formData.get('comment')?.toString() ?? null;
 
   const errorMessages: string[] = [];
 

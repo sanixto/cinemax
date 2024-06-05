@@ -4,12 +4,11 @@ import { useRouter, useSearchParams, usePathname} from 'next/navigation';
 import Link from 'next/link';
 
 import styles from './index.module.css';
-import Showtime from '@/interfaces/showtime.interface';
 import { ChangeEvent, useState } from 'react';
 import { formatDateAndTime } from '@/lib/formatDate';
 import { TICKET_PRICE } from '@/constants';
-import Movie from '@/interfaces/movie.interface';
 import SeatsPickerForm from './seats-picker-form';
+import { Movie, Showtime } from '@prisma/client';
 
 interface ModalSeatsPickerProps {
   showtime: Showtime | null,
@@ -61,7 +60,7 @@ export default function ModalSeatsPicker({ showtime, movie }: ModalSeatsPickerPr
           </div>
           <div className={styles.screen}>Екран</div>
           <SeatsPickerForm
-            availableSeats={showtime.availableSeats}
+            availableSeats={JSON.parse(showtime.availableSeats as string)}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             disabled={selectedSeats.length <= 0}

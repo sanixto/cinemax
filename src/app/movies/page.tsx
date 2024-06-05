@@ -3,8 +3,8 @@ import MoviesGrid from '@/components/movies-grid/movies-grid';
 import Pagination from '@/components/pagination';
 import { MOVIES_PER_PAGE } from '@/constants';
 import { FilterInterface } from '@/interfaces/filter.interface';
-import Movie from '@/interfaces/movie.interface';
 import { getAvailableGenres, getMovies, getMoviesLength } from '@/lib/movies';
+import { Movie } from '@prisma/client';
 
 interface MoviesPageProps {
   searchParams: {

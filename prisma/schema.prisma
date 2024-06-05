@@ -21,39 +21,39 @@ model Movie {
   directors      String[]
   rating         Float
   votes          Int
-  image_url      String
-  trailer_url    String
+  imageUrl       String   @map("image_url")
+  trailerUrl     String   @map("trailer_url")
   showtimes      Showtime[]
   reviews        Review[]
 }
 
 model Showtime {
   id               String   @id @default(uuid())
-  movie            Movie    @relation(fields: [movie_id], references: [id])
-  movie_id         String
+  movie            Movie    @relation(fields: [movieId], references: [id])
+  movieId          String   @map("movie_id")
   date             DateTime
   time             String
-  available_seats  Json
+  availableSeats   Json     @map("available_seats")
 }
 
 model User {
   id          String   @id @default(uuid())
   email       String   @unique
   name        String
-  image_url   String
+  imageUrl    String   @map("image_url")
   reviews     Review[]
 }
 
 model Review {
   id            String   @id @default(uuid())
-  user          User     @relation(fields: [user_id], references: [id])
-  user_id       String
-  movie         Movie    @relation(fields: [movie_id], references: [id])
-  movie_id      String
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String   @map("user_id")
+  movie         Movie    @relation(fields: [movieId], references: [id])
+  movieId       String   @map("movie_id")
   rating        Int
   comment       String?
-  created_at    DateTime @default(now())
+  createdAt     DateTime @default(now()) @map("created_at")
 
-  @@index([user_id], name: "idx_user_id")
-  @@index([movie_id], name: "idx_movie_id")
+  @@index([userId], name: "idx_user_id")
+  @@index([movieId], name: "idx_movie_id")
 }

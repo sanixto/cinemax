@@ -1,4 +1,4 @@
-export type FilterKey = 'genres' | 'title'; // Add other keys as needed
+export type FilterKey = 'genres' | 'title';
 export type FilterInterface = {
   genres?: string[],
   title?: string,

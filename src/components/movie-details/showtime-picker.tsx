@@ -8,9 +8,9 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { getNextFormattedDays } from '@/lib/formatDate';
 import styles from './showtime-picker.module.css';
 import calendarImg from '@/assets/calendar.png';
-import Showtime from '@/interfaces/showtime.interface';
 import DateData from '@/interfaces/dateData.interface';
 import { LOGIN_PATH } from '@/constants';
+import { Showtime } from '@prisma/client';
 
 interface ShowtimePicker {
   showtimes: Showtime[],

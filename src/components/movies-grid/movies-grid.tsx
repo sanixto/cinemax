@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import styles from './movies-grid.module.css';
-import Movie from '@/interfaces/movie.interface';
 import MovieCard from './movie-card';
+import { Movie } from '@prisma/client';
 
 interface MoviesGridProps {
   movies: Movie[],

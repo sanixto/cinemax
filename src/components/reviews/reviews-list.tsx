@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import styles from './reviews-list.module.css';
-import Review from '@/interfaces/review.interface';
-import User from '@/interfaces/user.interface';
 import { formatDateAndTime } from '@/lib/formatDate';
+import { Review, User } from '@prisma/client';
 
 interface ReviewsListProps {
   reviews: Review[] | null,

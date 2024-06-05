@@ -1,6 +1,5 @@
-import User from '@/interfaces/user.interface';
 import prisma from '../lib/prisma';
-import { parseDataFromDB } from './databaseData';
+import { User } from '@prisma/client';
 import Auth0User from '@/interfaces/auth0User.interface';
 
 export async function getUsers(): Promise<User[] | null> {
@@ -9,9 +8,7 @@ export async function getUsers(): Promise<User[] | null> {
 
     if (!data) return null;
 
-    const parsedUsers: User[] = data.map(user => parseDataFromDB(user));
-
-    return parsedUsers;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch users data.');
@@ -20,55 +17,39 @@ export async function getUsers(): Promise<User[] | null> {
 
 export async function getUser(id: string): Promise<User | null> {
   try {
-    const data = await prisma.user.findFirst({
-      where: {
-        id: id,
-      }
-    });
+    const data = await prisma.user.findUnique({ where: { id: id } });
 
     if (!data) return null;
 
-    const parsedUser: User = parseDataFromDB(data);
-
-    return parsedUser;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch users data.');
+    throw new Error(`Failed to fetch user data with id ${id}.`);
   }
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
   try {
-    const data = await prisma.user.findFirst({
-      where: {
-        email: email,
-      }
-    });
+    const data = await prisma.user.findUnique({ where: { email } });
 
     if (!data) return null;
 
-    const parsedUser: User = parseDataFromDB(data);
-
-    return parsedUser;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch users data.');
+    throw new Error(`Failed to fetch user data with email ${email}.`);
   }
 }
 
-export async function checkIfUserExists(email: string): Promise<boolean> {
+export async function checkIfUserWithEmailExists(email: string): Promise<boolean> {
   try {
-    const data = await prisma.user.findFirst({
-      where: {
-        email: email,
-      }
-    });
+    const data = await prisma.user.findFirst({ where: { email } });
 
     if (data) return true;
     return false;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch user data.');
+    throw new Error(`Failed to fetch user data with email ${email}.`);
   }
 }
 
@@ -79,15 +60,13 @@ export async function saveUser(user: Auth0User): Promise<User | null> {
       data: {
         name: name ,
         email: user.email,
-        image_url: user.picture,
+        imageUrl: user.picture,
       }
     });
 
     if (!data) return null;
 
-    const parsedUser: User = parseDataFromDB(data);
-
-    return parsedUser;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to save user data in database.');

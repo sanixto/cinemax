@@ -1,6 +1,5 @@
-import Showtime from '@/interfaces/showtime.interface';
+import { Showtime } from '@prisma/client';
 import prisma from '../lib/prisma';
-import { parseDataFromDB } from './databaseData';
 
 export async function getShowtimes(movieId: string, date?: Date): Promise<Showtime[] | null> {
   let formattedDate: Date | undefined;
@@ -9,21 +8,20 @@ export async function getShowtimes(movieId: string, date?: Date): Promise<Showti
   try {
     const data = await prisma.showtime.findMany({
       where: {
-        movie_id: movieId,
+        movieId,
         date: formattedDate,
       }
     });
 
     if (!data) return null;
 
-    const parsedShowtimes = data.map(showtime => parseDataFromDB(showtime));
-    parsedShowtimes.map(showtime => {
-      return Object.assign(showtime, {
-        availableSeats: JSON.parse(showtime.availableSeats)
-      });
-    });
+    // data.map(showtime => {
+    //   return Object.assign(showtime, {
+    //     availableSeats: JSON.parse(showtime.availableSeats)
+    //   });
+    // });
 
-    return parsedShowtimes;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch showtimes data.');
@@ -32,18 +30,11 @@ export async function getShowtimes(movieId: string, date?: Date): Promise<Showti
 
 export async function getShowtime(id: string): Promise<Showtime | null> {
   try {
-    const data = await prisma.showtime.findUnique({
-      where: {
-       id: id
-      }
-    });
+    const data = await prisma.showtime.findUnique({ where: { id: id } });
 
     if (!data) return null;
 
-    const parsedShowtime = parseDataFromDB(data);
-    parsedShowtime.availableSeats = JSON.parse(parsedShowtime.availableSeats);
-
-    return parsedShowtime;
+    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch showtimes data.');

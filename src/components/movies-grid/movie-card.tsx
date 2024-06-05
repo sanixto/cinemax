@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
 import styles from './movie-card.module.css';
-import Movie from '@/interfaces/movie.interface';
 import { formatRating } from '@/lib/formatData';
+import { Movie } from '@prisma/client';
 
 interface MovieCardProps {
   movie: Movie,

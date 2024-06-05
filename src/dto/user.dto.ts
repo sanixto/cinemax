@@ -1,5 +1,4 @@
-export default interface User {
-  id: string,
+export default interface UserDto {
   name: string,
   email: string,
   imageUrl: string,

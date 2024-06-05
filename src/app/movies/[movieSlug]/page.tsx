@@ -5,14 +5,11 @@ import ModalSeatsPicker from '@/components/modalSeatsPicker';
 import MovieDetails from '@/components/movie-details';
 import ShowtimePicker from '@/components/movie-details/showtime-picker';
 import Reviews from '@/components/reviews';
-import Review from '@/interfaces/review.interface';
-import Showtime from '@/interfaces/showtime.interface';
-import User from '@/interfaces/user.interface';
 import { getMovie } from '@/lib/movies';
 import { getReviews } from '@/lib/reviews';
 import { getShowtime, getShowtimes } from '@/lib/showtimes';
 import { getUser } from '@/lib/users';
-import Movie from '@/interfaces/movie.interface';
+import { Movie, Review, Showtime, User } from '@prisma/client';
 
 interface MealDetailsPage {
   params: {

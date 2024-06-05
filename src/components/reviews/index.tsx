@@ -3,10 +3,9 @@
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 import styles from './index.module.css';
-import Review from '@/interfaces/review.interface';
-import User from '@/interfaces/user.interface';
 import ReviewsList from './reviews-list';
 import ReviewForm from './review-form';
+import { Review, User } from '@prisma/client';
 
 interface ReviewsProps {
   reviews: Review[] | null,
