@@ -11,7 +11,7 @@ import { getShowtime, getShowtimes } from '@/lib/showtimes';
 import { getUser } from '@/lib/users';
 import { Movie, Review, Showtime, User } from '@prisma/client';
 
-interface MealDetailsPage {
+interface MovieDetailsPageProps {
   params: {
     movieSlug: string,
   },
@@ -21,7 +21,7 @@ interface MealDetailsPage {
   }
 }
 
-export default async function MealDetailsPage({ params, searchParams }: MealDetailsPage) {
+export default async function MovieDetailsPage({ params, searchParams }: MovieDetailsPageProps) {
   const selectedDateStr: string | undefined = searchParams?.date;
   const date = selectedDateStr ? new Date(selectedDateStr) : new Date();
   const showtimeId: string | undefined = searchParams?.showtimeId;

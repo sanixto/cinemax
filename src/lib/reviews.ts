@@ -34,3 +34,32 @@ export async function saveReview(review: ReviewDto): Promise<Review | null> {
     throw new Error('Failed to save review data.');
   }
 }
+
+export async function updateReview(id: string, review: Partial<ReviewDto>): Promise<Review | null> {
+  try {
+    const data = await prisma.review.update({
+      where: { id },
+      data: review
+    });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to update review data with id ${id}.`);
+  }
+}
+
+export async function deleteReview(id: string): Promise<Review | null> {
+  try {
+    const data = await prisma.review.delete({ where: { id } });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to delete review data with id ${id}.`);
+  }
+}

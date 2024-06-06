@@ -1,6 +1,7 @@
 import prisma from '../lib/prisma';
 import { User } from '@prisma/client';
 import Auth0User from '@/interfaces/auth0User.interface';
+import UserDto from '@/dto/user.dto';
 
 export async function getUsers(): Promise<User[] | null> {
   try {
@@ -73,3 +74,31 @@ export async function saveUser(user: Auth0User): Promise<User | null> {
   }
 }
 
+export async function updateUser(id: string, userData: Partial<UserDto>): Promise<User | null> {
+  try {
+    const data = await prisma.user.update({
+      where: { id },
+      data: userData,
+    });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to update user data with id ${id}.`);
+  }
+}
+
+export async function deleteUser(id: string): Promise<User | null> {
+  try {
+    const data = await prisma.user.delete({ where: { id } });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to delete user data with id ${id}.`);
+  }
+}

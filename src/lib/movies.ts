@@ -1,6 +1,7 @@
 import prisma from '../lib/prisma';
 import { Movie } from '@prisma/client';
 import { FilterInterface } from '@/interfaces/filter.interface';
+import MovieDto from '@/dto/movie.dto';
 
 export async function getMovies(page?: number, limit?: number, filter?: FilterInterface): Promise<Movie[]> {
   let offset: number = 0;
@@ -15,9 +16,9 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
         genres: {
           hasEvery: filter?.genres,
         },
-          title: {
-            contains: filter?.title?.toLowerCase(),
-          }
+        title: {
+          contains: filter?.title?.toLowerCase(),
+        }
       },
       take: limit,
       skip: offset,
@@ -60,6 +61,35 @@ export async function getMovie(id: string): Promise<Movie | null> {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to fetch movie data with id${id}`);
+  }
+}
+
+export async function updateMovie(id: string, movie: Partial<MovieDto>): Promise<Movie | null> {
+  try {
+    const data = await prisma.movie.update({
+      where: { id },
+      data: movie
+    });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to update movie data with id ${id}.`);
+  }
+}
+
+export async function deleteMovie(id: string): Promise<Movie | null> {
+  try {
+    const data = await prisma.movie.delete({ where: { id } });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to delete movie data with id ${id}.`);
   }
 }
 

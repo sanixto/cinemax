@@ -1,5 +1,6 @@
 import { Showtime } from '@prisma/client';
 import prisma from '../lib/prisma';
+import ShowtimeDto from '@/dto/showtime.dto';
 
 export async function getShowtimes(movieId: string, date?: Date): Promise<Showtime[] | null> {
   let formattedDate: Date | undefined;
@@ -14,12 +15,6 @@ export async function getShowtimes(movieId: string, date?: Date): Promise<Showti
     });
 
     if (!data) return null;
-
-    // data.map(showtime => {
-    //   return Object.assign(showtime, {
-    //     availableSeats: JSON.parse(showtime.availableSeats)
-    //   });
-    // });
 
     return data;
   } catch (error) {
@@ -38,5 +33,47 @@ export async function getShowtime(id: string): Promise<Showtime | null> {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch showtimes data.');
+  }
+}
+
+export async function saveShowtime(showtime: ShowtimeDto): Promise<Showtime | null> {
+  try {
+    const data = await prisma.showtime.create({ data: showtime });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to save showtime data.');
+  }
+}
+
+export async function updateShowtime(id: string, showtime: Partial<ShowtimeDto>): Promise<Showtime | null> {
+  try {
+    const data = await prisma.showtime.update({
+      where: { id },
+      data: showtime
+    });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to update showtime data with id ${id}.`);
+  }
+}
+
+export async function deleteShowtime(id: string): Promise<Showtime | null> {
+  try {
+    const data = await prisma.showtime.delete({ where: { id } });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error(`Failed to delete showtime data with id ${id}.`);
   }
 }
