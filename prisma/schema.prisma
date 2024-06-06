@@ -25,6 +25,8 @@ model Movie {
   trailerUrl     String   @map("trailer_url")
   showtimes      Showtime[]
   reviews        Review[]
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
 }
 
 model Showtime {
@@ -34,6 +36,9 @@ model Showtime {
   date             DateTime
   time             String
   availableSeats   Json     @map("available_seats")
+  booking          Booking?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
 }
 
 model User {
@@ -42,6 +47,9 @@ model User {
   name        String
   imageUrl    String   @map("image_url")
   reviews     Review[]
+  bookings    Booking[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 }
 
 model Review {
@@ -53,7 +61,22 @@ model Review {
   rating        Int
   comment       String?
   createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
-  @@index([userId], name: "idx_user_id")
-  @@index([movieId], name: "idx_movie_id")
+  @@index([userId], name: "idx_review_user_id")
+  @@index([movieId], name: "idx_review_movie_id")
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String   @map("user_id")
+  showtime      Showtime @relation(fields: [showtimeId], references: [id])
+  showtimeId    String   @unique @map("showtime_id")
+  seats         Json
+  isPayed       Boolean
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([userId], name: "idx_booking_user_id")
 }

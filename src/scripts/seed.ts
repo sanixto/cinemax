@@ -6,7 +6,7 @@ async function seedMovies() {
     await prisma.movie.create({
       data: {
         id: movie.id,
-        title: movie.title.toLowerCase(),
+        title: movie.title?.toLowerCase(),
         description: movie.description,
         year: movie.year,
         duration: movie.duration,
@@ -41,7 +41,7 @@ async function seedShowtimes() {
 async function seedUsers() {
   for (const user of users) {
     await prisma.user.create({
-      data: user
+      data: user,
     });
   }
   console.log(`Seeded ${users.length} users`);
@@ -64,10 +64,10 @@ async function seedReviews() {
 
 async function main() {
   try {
-    // await seedMovies();
-    // await seedShowtimes();
-    // await seedUsers();
-    // await seedReviews();
+    await seedMovies();
+    await seedShowtimes();
+    await seedUsers();
+    await seedReviews();
   } catch (err) {
     console.error('An error occurred while attempting to seed the database:', err);
   }

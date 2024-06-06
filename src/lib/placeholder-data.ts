@@ -1,7 +1,10 @@
-import { Movie, Review, Showtime, User } from '@prisma/client';
+import MovieDto from '../dto/movie.dto';
+import ReviewDto from '../dto/review.dto';
+import ShowtimeDto from '../dto/showtime.dto';
+import UserDto from '../dto/user.dto';
 import { v4 as uuidv4 } from 'uuid';
 
-export const movies: Movie[] = [
+export const movies: (MovieDto & {id: string})[] = [
   {
     id: "9d142844-6554-4967-bd07-09c4fd9b7812",
     title: 'Ґарфілд у кіно',
@@ -679,7 +682,7 @@ for (let i = 1; i <= columns; i++) {
   }
 }
 
-export const showtimes: Showtime[] = [
+export const showtimes: (ShowtimeDto & {id: string})[] = [
   {
     id: uuidv4(),
     movieId: "9d142844-6554-4967-bd07-09c4fd9b7812",
@@ -1982,7 +1985,7 @@ export const showtimes: Showtime[] = [
   },
 ];
 
-export const users: User[] = [
+export const users: (UserDto & {id: string})[] = [
   {
     id: "2c83cfa3-baae-4034-8ff6-02db3fbdbfd8",
     name: "Олександр",
@@ -2046,7 +2049,7 @@ export const users: User[] = [
 ];
 
 
-export const reviews: Review[] = [
+export const reviews: (ReviewDto & {id: string, createdAt: Date})[] = [
   {
     id: "1384a5a9-6d2d-40b6-ae00-8c35a23b78a8",
     userId: "2c83cfa3-baae-4034-8ff6-02db3fbdbfd8",
