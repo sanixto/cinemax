@@ -6,17 +6,17 @@ import { useEffect, useState } from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 import { getNextFormattedDays } from '@/lib/formatDate';
-import styles from './showtime-picker.module.css';
+import styles from './index.module.css';
 import calendarImg from '@/assets/calendar.png';
 import DateData from '@/interfaces/dateData.interface';
 import { LOGIN_PATH } from '@/constants';
 import { Showtime } from '@prisma/client';
 
-interface ShowtimePicker {
+interface ShowtimePickerProps {
   showtimes: Showtime[],
 }
 
-export default function ShowtimePicker({ showtimes }: ShowtimePicker) {
+export default function ShowtimePicker({ showtimes }: ShowtimePickerProps) {
   const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
   const router = useRouter();
   const pathname: string = usePathname();
