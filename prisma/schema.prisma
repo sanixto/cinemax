@@ -73,7 +73,8 @@ model Booking {
   userId        String   @map("user_id")
   showtime      Showtime @relation(fields: [showtimeId], references: [id])
   showtimeId    String   @unique @map("showtime_id")
-  seats         Int[]
+  seats         String[]
+  price         Int
   isPayed       Boolean
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")

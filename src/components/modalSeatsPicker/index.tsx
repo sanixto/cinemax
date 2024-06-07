@@ -4,7 +4,7 @@ import { useRouter, useSearchParams, usePathname} from 'next/navigation';
 import Link from 'next/link';
 
 import styles from './index.module.css';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { formatDateAndTime } from '@/lib/formatDate';
 import { TICKET_PRICE } from '@/constants';
 import SeatsPickerForm from './seats-picker-form';
@@ -13,14 +13,22 @@ import { Movie, Showtime } from '@prisma/client';
 interface ModalSeatsPickerProps {
   showtime: Showtime | null,
   movie: Movie | null,
+  action: (showtimeId: string, seats: string[], prevState: { bookingId: string }, formData: FormData) => Promise<{ bookingId: string }>,
 }
 
-export default function ModalSeatsPicker({ showtime, movie }: ModalSeatsPickerProps) {
+export default function ModalSeatsPicker({ showtime, movie, action }: ModalSeatsPickerProps) {
   const router = useRouter();
   const pathname: string = usePathname();
   const searchParams = useSearchParams();
 
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSelectedSeats([]);
+  }, [showtime]);
+
+  if (!showtime || !movie || !action) return null;
+
   let date = showtime && formatDateAndTime(showtime!.date).split(' ').slice(0,2).join(' ');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,15 +40,7 @@ export default function ModalSeatsPicker({ showtime, movie }: ModalSeatsPickerPr
     }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('seats', selectedSeats.join(','));
-    if (params.has('date')) params.delete('date');
-    router.push(`/payment?${params.toString()}`);
-  }
-
-  return showtime && (
+  return (
     <dialog className={styles.modal}>
       <div className={styles.content}>
         <Link href={pathname} className="float-right">
@@ -62,7 +62,7 @@ export default function ModalSeatsPicker({ showtime, movie }: ModalSeatsPickerPr
           <SeatsPickerForm
             availableSeats={JSON.parse(showtime.availableSeats as string)}
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
+            action={action.bind(undefined, showtime.id, selectedSeats)}
             disabled={selectedSeats.length <= 0}
           />
           {selectedSeats.length > 0 && (

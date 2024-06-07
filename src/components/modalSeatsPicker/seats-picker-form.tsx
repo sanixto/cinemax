@@ -1,15 +1,29 @@
+'use client';
+import { useFormState, useFormStatus } from 'react-dom';
 import styles from './seats-picker-form.module.css';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface SeatsPickerForm {
   availableSeats: boolean[][],
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
+  action: (prevState: { bookingId: string }, formData: FormData) => Promise<{ bookingId: string }>,
   disabled: boolean,
 }
 
-export default function SeatsPickerForm({ availableSeats, handleChange, handleSubmit, disabled }: SeatsPickerForm) {
+export default function SeatsPickerForm({ availableSeats, handleChange, action, disabled }: SeatsPickerForm) {
+  const router = useRouter();
+  const [state, formAction] = useFormState(action, {bookingId: '' });
+  const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (state.bookingId) {
+      router.push(`/payment/${state.bookingId}`);
+    }
+  }, [state.bookingId, router]);
+
   return (
-    <form className={styles.hall} onSubmit={handleSubmit}>
+    <form className={styles.hall} action={formAction}>
       {availableSeats?.map((row, rowIndex) => {
         return (
           <div key={`row-${rowIndex}`} className={styles.row}>
@@ -28,7 +42,9 @@ export default function SeatsPickerForm({ availableSeats, handleChange, handleSu
         );
       })}
       <div className="flex justify-center">
-        <button type="submit" disabled={disabled}>Далі</button>
+        <button type="submit" disabled={disabled}>
+          {pending ? 'Завантаження...' : 'Далі' }
+        </button>
       </div>
     </form>
   );
