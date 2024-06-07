@@ -1,0 +1,19 @@
+.article {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ddd6cb;
+  border-radius: 5px;
+  padding: 5em;
+}
+
+.article h2 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.article time {
+  color: #ddd6cb;
+}
