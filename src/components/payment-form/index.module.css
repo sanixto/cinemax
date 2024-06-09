@@ -6,7 +6,7 @@
 }
 
 .form > div {
-  margin-bottom: 0.5em;
+  margin-bottom: 1.5em;
   justify-content:space-between
 }
 
@@ -32,4 +32,12 @@
   border: 1px solid #ddd6cb;
   border-radius: 5px;
   padding: 0.2em;
+}
+
+.form a {
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: auto;
 }

@@ -10,10 +10,11 @@
 }
 
 .article h2 {
-  font-size: 1.2em;
+  font-size: 1.3em;
   text-transform: uppercase;
 }
 
 .article time {
+  font-size: 0.9em;
   color: #ddd6cb;
 }

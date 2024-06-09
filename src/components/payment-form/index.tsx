@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './index.module.css';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -17,7 +18,7 @@ export default function PaymentForm({ price, action }: PaymentFormProps) {
 
   useEffect(() => {
     if (state.isPayed) {
-      router.replace('/movies');
+      router.replace('/profile');
     }
   }, [state.isPayed, router]);
 
@@ -60,8 +61,11 @@ export default function PaymentForm({ price, action }: PaymentFormProps) {
       </div>
       <div>
         <button type="submit">
-          {pending ? 'Зачекайте...' : `Сплатити ${price}`} грн
+          {pending ? 'Зачекайте...' : `Оплатити ${price}`} грн
         </button>
+      </div>
+      <div className="flex">
+        <Link href={'/profile'}>Оплатити пізніше</Link>
       </div>
     </form>
   )

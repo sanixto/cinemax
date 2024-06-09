@@ -5,6 +5,12 @@ import { MOVIES_PER_PAGE } from '@/constants';
 import { FilterInterface } from '@/interfaces/filter.interface';
 import { getAvailableGenres, getMovies, getMoviesLength } from '@/lib/movies';
 import { Movie } from '@prisma/client';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Фільми | Cinemax',
+  description: 'Перегляд доступних фільмів у кінотеатрі Cinemax',
+}
 
 interface MoviesPageProps {
   searchParams: {

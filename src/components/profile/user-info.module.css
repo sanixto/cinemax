@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  gap: 10em;
+}
+
+.container img {
+  border-radius: 100%;
+}
+
+.container ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 1.2em;
+}
