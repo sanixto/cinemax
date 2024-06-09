@@ -38,20 +38,19 @@ export async function createReview(movieId: string, prevState: createReviewState
   }
 
   if (errorMessages.length > 0) return { errorMessages };
-  if (user) {
-    try {
-      const review = await saveReview({
-        userId: user?.id,
-        movieId,
-        rating,
-        comment,
-      });
-      if (review) {
-        await updateRating(movieId, rating);
-      }
-    } catch (e) {
-      console.log(e);
+  if (!user) throw new Error('401 Unuthorized')
+  try {
+    const review = await saveReview({
+      userId: user?.id,
+      movieId,
+      rating,
+      comment,
+    });
+    if (review) {
+      await updateRating(movieId, rating);
     }
+  } catch (e) {
+    console.log(e);
   }
 
   revalidatePath(`/movies/${movieId}`, 'page');

@@ -11,7 +11,7 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
   }
 
   try {
-    const data = await prisma.movie.findMany({
+    return await prisma.movie.findMany({
       where: {
         genres: {
           hasEvery: filter?.genres,
@@ -23,8 +23,6 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
       take: limit,
       skip: offset,
     });
-
-    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch movies data.');
@@ -33,7 +31,7 @@ export async function getMovies(page?: number, limit?: number, filter?: FilterIn
 
 export async function getMoviesLength(filter?: FilterInterface): Promise<number> {
   try {
-    const count = await prisma.movie.count({
+    return await prisma.movie.count({
       where: {
         genres: {
           hasEvery: filter?.genres,
@@ -43,8 +41,6 @@ export async function getMoviesLength(filter?: FilterInterface): Promise<number>
         }
       },
     });
-
-    return count;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch movies data length.');
@@ -53,40 +49,28 @@ export async function getMoviesLength(filter?: FilterInterface): Promise<number>
 
 export async function getMovie(id: string): Promise<Movie | null> {
   try {
-    const data = await prisma.movie.findUnique({ where: { id } });
-
-    if (!data) return null;
-
-    return data;
+    return await prisma.movie.findUnique({ where: { id } });
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to fetch movie data with id${id}`);
   }
 }
 
-export async function updateMovie(id: string, movie: Partial<MovieDto>): Promise<Movie | null> {
+export async function updateMovie(id: string, movie: Partial<MovieDto>): Promise<Movie> {
   try {
-    const data = await prisma.movie.update({
+    return await prisma.movie.update({
       where: { id },
       data: movie
     });
-
-    if (!data) return null;
-
-    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to update movie data with id ${id}.`);
   }
 }
 
-export async function deleteMovie(id: string): Promise<Movie | null> {
+export async function deleteMovie(id: string): Promise<Movie> {
   try {
-    const data = await prisma.movie.delete({ where: { id } });
-
-    if (!data) return null;
-
-    return data;
+    return await prisma.movie.delete({ where: { id } });
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to delete movie data with id ${id}.`);
@@ -108,19 +92,18 @@ export async function getAvailableGenres(): Promise<string[]> {
   }
 }
 
-export async function updateRating(id: string, rating: number): Promise<Movie | null> {
+export async function updateRating(id: string, rating: number): Promise<Movie> {
   try {
     const currentMovie = await prisma.movie.findUnique({ where: { id } });
 
     if (!currentMovie) {
-      console.error(`Movie with id ${id} not found.`);
-      return null;
+      throw new Error(`Movie with id ${id} not found.`);
     }
 
     const newVotes = currentMovie.votes + 1;
-    const newRating = (currentMovie.rating + rating) / newVotes;
+    const newRating = (currentMovie.rating * currentMovie.votes + rating) /  newVotes;
 
-    const data = await prisma.movie.update({
+    return await prisma.movie.update({
       where: {
         id,
       },
@@ -129,10 +112,6 @@ export async function updateRating(id: string, rating: number): Promise<Movie | 
         votes: newVotes,
       },
     });
-
-    if (!data) return null;
-
-    return data;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error(`Failed to update movie rating with id${id}`);
