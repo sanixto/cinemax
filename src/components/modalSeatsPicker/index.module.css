@@ -1,0 +1,96 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(221, 214, 203, 0.8);
+  z-index: 3;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.content {
+  background-color: white;
+  margin: auto;
+  padding: 2em;
+  z-index: -2;
+}
+
+.modal h3 {
+  font-size: 2em;
+  font-weight: 500;
+}
+
+.modal time {
+  color: rgb(73, 73, 73);
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.svg {
+  position: absolute;
+  width: 80%;
+  z-index: -1;
+}
+
+.summary {
+  padding: 2em;
+  font-size: 1.2em;
+}
+
+.screen {
+  text-align: center;
+  font-size: 0.8em;
+}
+
+@media (min-width: 640px) {
+  .screen {
+    font-size: 1em;
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 768px) {
+  .seat {
+    padding: 2em;
+  }
+  .screen {
+    font-size: 1.2em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .seat {
+    padding: 2.3em;
+  }
+  .content {
+    width: 80%;
+  }
+  .svg {
+    width: 70%;
+  }
+  .screen {
+    font-size: 1.4em;
+  }
+}
+
+@media (min-width: 1280px) {
+  .svg {
+    width: 60%;
+  }
+  .screen {
+    padding-top: 0.2em;
+  }
+}
+
+@media (min-width: 1536px) {
+  .svg {
+    width: 40%;
+  }
+
+}

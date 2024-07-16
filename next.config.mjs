@@ -1,4 +1,30 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's.gravatar.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
+};
 
 export default nextConfig;

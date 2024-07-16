@@ -1,0 +1,19 @@
+.select {
+  background-color: white;
+  border: 1px solid #ddd6cb;
+  border-radius: 5px;
+  padding: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+  text-transform: capitalize
+}
+
+.select option {
+  padding: 2em;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5em;
+}

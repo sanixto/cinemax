@@ -1,0 +1,16 @@
+.menu {
+  background-color: #fef8ef;
+  color: aliceblue;
+  left: 0;
+  position: fixed;
+  top: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.menu a {
+  border-bottom: 1px solid #ddd6cb;
+  display: block;
+  padding: 2em 1em;
+}
